@@ -13,7 +13,12 @@
     "node": ">=14"
   },
   "node-standards": {
-    "type": "yargs-cli"
+    "type": "yargs-cli",
+    "template": {
+      "exclude": [
+        "bin/run"
+      ]
+    }
   },
   "files": [
     "bin",
