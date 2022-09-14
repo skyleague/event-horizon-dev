@@ -6,6 +6,7 @@
   "main": ".main.js",
   "types": "index.d.ts",
   "bin": {
+    "event-horizon-cli": "./bin/run",
     "event-horizon": "./bin/run"
   },
   "engines": {
