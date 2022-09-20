@@ -55,7 +55,12 @@ export async function handler(argv: ReturnType<typeof builder>['argv']): Promise
                 for (const [header, val] of entriesOf(result.headers ?? {})) {
                     res.set(header, val.toString())
                 }
-                res.status(result.statusCode).json(JSON.parse(result.body))
+                res.status(result.statusCode)
+                if (result.headers?.['content-type'].toString()?.includes('json') === true) {
+                    res.json(JSON.parse(result.body))
+                } else {
+                    res.send(result.body)
+                }
             })
         }
     }
