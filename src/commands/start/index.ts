@@ -56,7 +56,12 @@ export async function handler(argv: ReturnType<typeof builder>['argv']): Promise
                     res.set(header, val.toString())
                 }
                 res.status(result.statusCode)
-                if (result.headers?.['content-type'].toString()?.includes('json') === true) {
+                if (
+                    Object.entries(result.headers ?? {})
+                        .find(([header]) => header.toLowerCase() === 'content-type')?.[1]
+                        ?.toString()
+                        ?.includes('json') === true
+                ) {
                     res.json(JSON.parse(result.body))
                 } else {
                     res.send(result.body)
