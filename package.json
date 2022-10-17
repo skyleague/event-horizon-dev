@@ -1,8 +1,9 @@
 {
   "name": "@skyleague/event-horizon-cli",
-  "description": "example package",
+  "description": "The accompanying CLI for the @skyleague/event-horizon package.",
   "version": "0.0.1",
   "license": "MIT",
+  "author": "SkyLeague Technologies B.V. <technologies@skyleague.io> (https://skyleague.io)",
   "main": ".main.js",
   "types": "index.d.ts",
   "bin": {
