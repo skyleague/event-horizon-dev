@@ -1,13 +1,13 @@
 {
-  "name": "@skyleague/event-horizon-cli",
-  "description": "The accompanying CLI for the @skyleague/event-horizon package.",
-  "version": "0.0.1",
+  "name": "@skyleague/event-horizon-dev",
+  "description": "The accompanying development package for @skyleague/event-horizon.",
+  "version": "1.0.0",
   "license": "MIT",
   "author": "SkyLeague Technologies B.V. <technologies@skyleague.io> (https://skyleague.io)",
   "main": ".main.js",
   "types": "index.d.ts",
   "bin": {
-    "event-horizon-cli": "./bin/run",
+    "event-horizon-dev": "./bin/run",
     "event-horizon": "./bin/run"
   },
   "engines": {
@@ -47,22 +47,23 @@
     "test": "npx jest"
   },
   "devDependencies": {
-    "@skyleague/node-standards": "^1.7.3",
-    "@types/aws-lambda": "^8.10.103",
+    "@skyleague/node-standards": "^1.10.0",
+    "@types/aws-lambda": "^8.10.109",
     "@types/source-map-support": "^0.5.6",
-    "typescript": "^4.8.2"
+    "typescript": "^4.9.3"
   },
   "dependencies": {
-    "@skyleague/axioms": "^1.3.3",
-    "@skyleague/event-horizon": "^1.10.1",
-    "@skyleague/space-junk": "^1.0.0",
+    "@skyleague/axioms": "^1.9.0",
+    "@skyleague/event-horizon": "^1.26.2",
+    "@skyleague/space-junk": "^1.2.1",
+    "@skyleague/therefore": "^1.20.2",
     "@types/express": "^4.17.14",
-    "express": "^4.18.1",
+    "express": "^4.18.2",
     "express-list-endpoints": "^6.0.0",
     "express-promise-router": "^4.1.1",
     "source-map-support": "^0.5.21",
-    "tslib": "^2.4.0",
-    "yargs": "^17.5.1"
+    "tslib": "^2.4.1",
+    "yargs": "^17.6.2"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
