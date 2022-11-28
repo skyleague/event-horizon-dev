@@ -6,6 +6,8 @@ import { install } from 'source-map-support'
 import type { CommandModule } from 'yargs'
 import yargs from 'yargs'
 
+export * from './lib'
+
 export async function run(): Promise<void> {
     install()
 
