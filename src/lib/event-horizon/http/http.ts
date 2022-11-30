@@ -2,7 +2,7 @@ import { APIGatewayProxyEvent } from '../../aws/apigateway'
 
 import type { Dependent } from '@skyleague/axioms'
 import { constant, object } from '@skyleague/axioms'
-import type { GatewayVersion, HttpHandler, HttpRequest } from '@skyleague/event-horizon'
+import type { GatewayVersion, HTTPHandler, HTTPRequest } from '@skyleague/event-horizon'
 import { arbitrary } from '@skyleague/therefore'
 
 export function httpEvent<
@@ -14,7 +14,7 @@ export function httpEvent<
     HttpH = unknown,
     HttpR = unknown,
     GV extends GatewayVersion = 'v1'
->(definition: HttpHandler<C, S, HttpB, HttpP, HttpQ, HttpH, HttpR, GV>): Dependent<HttpRequest<HttpB, HttpP, HttpQ, HttpH, GV>> {
+>(definition: HTTPHandler<C, S, HttpB, HttpP, HttpQ, HttpH, HttpR, GV>): Dependent<HTTPRequest<HttpB, HttpP, HttpQ, HttpH, GV>> {
     const { http } = definition
     const { bodyType = 'json' } = http
 
@@ -49,5 +49,5 @@ export function httpEvent<
                 },
             }
         })
-    }) as unknown as Dependent<HttpRequest<HttpB, HttpP, HttpQ, HttpH, GV>>
+    }) as unknown as Dependent<HTTPRequest<HttpB, HttpP, HttpQ, HttpH, GV>>
 }
