@@ -12,7 +12,11 @@ export interface ContextOptions {
 }
 
 export async function context<C = never, S = never>(
-    { config, services, isSensitive }: EventHandlerDefinition & { config?: Config<C>; services?: Services<C, S> } = {},
+    {
+        config,
+        services,
+        isSensitive,
+    }: Omit<EventHandlerDefinition, 'config' | 'services'> & { config?: Config<C>; services?: Services<C, S> } = {},
     options: ContextOptions = {}
 ): Promise<Dependent<LambdaContext<C, S> & { mockClear: () => void }>> {
     const { exhaustive = false } = options
