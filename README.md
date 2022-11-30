@@ -1,12 +1,13 @@
-# Event Horizon CLI
+# Event Horizon Dev
 
-This is the accompanying CLI for the @skyleague/event-horizon package.
+This is the accompanying dev package for @skyleague/event-horizon.
 
 ## How to run
 
 ```sh
-event-horizon-cli start | npx pino-pretty -m message
+event-horizon-dev start | npx pino-pretty -m message
 ```
+
 
 ## Support
 
