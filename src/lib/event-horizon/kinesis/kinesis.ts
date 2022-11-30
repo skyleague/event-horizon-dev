@@ -5,12 +5,14 @@ import { tuple, unknown } from '@skyleague/axioms'
 import type { KinesisEvent, KinesisHandler } from '@skyleague/event-horizon'
 import { arbitrary } from '@skyleague/therefore'
 
-export function kinesisEvent<C = never, S = never, P = unknown>(definition: KinesisHandler<C, S, P>): Dependent<KinesisEvent<P>> {
+export function kinesisEvent<Configuration = never, Service = never, Profile = never, Payload = unknown>(
+    definition: KinesisHandler<Configuration, Service, Profile, Payload>
+): Dependent<KinesisEvent<Payload>> {
     const { kinesis } = definition
     const record = arbitrary(KinesisStreamRecord)
     const payload = kinesis.schema.payload !== undefined ? arbitrary(kinesis.schema.payload) : unknown()
     return tuple(record, payload).map(([r, p]) => ({
         raw: r,
         payload: p,
-    })) as unknown as Dependent<KinesisEvent<P>>
+    })) as unknown as Dependent<KinesisEvent<Payload>>
 }

@@ -6,22 +6,25 @@ import type { GatewayVersion, HTTPHandler, HTTPRequest } from '@skyleague/event-
 import { arbitrary } from '@skyleague/therefore'
 
 export function httpEvent<
-    C = unknown,
-    S = unknown,
-    HttpB = unknown,
-    HttpP = unknown,
-    HttpQ = unknown,
-    HttpH = unknown,
-    HttpR = unknown,
+    Configuration = unknown,
+    Service = unknown,
+    Profile = unknown,
+    Body = unknown,
+    Path = unknown,
+    Query = unknown,
+    Headers = unknown,
+    Result = unknown,
     GV extends GatewayVersion = 'v1'
->(definition: HTTPHandler<C, S, HttpB, HttpP, HttpQ, HttpH, HttpR, GV>): Dependent<HTTPRequest<HttpB, HttpP, HttpQ, HttpH, GV>> {
+>(
+    definition: HTTPHandler<Configuration, Service, Profile, Body, Path, Query, Headers, Result, GV>
+): Dependent<HTTPRequest<Body, Path, Query, Headers, GV>> {
     const { http } = definition
     const { bodyType = 'json' } = http
 
     const body = http.schema.body !== undefined ? arbitrary(http.schema.body) : constant(undefined)
     const headers = http.schema.headers !== undefined ? arbitrary(http.schema.headers) : constant(undefined)
     const query = http.schema.query !== undefined ? arbitrary(http.schema.query) : constant(undefined)
-    const path = http.schema.pathParams !== undefined ? arbitrary(http.schema.pathParams) : constant(undefined)
+    const path = http.schema.path !== undefined ? arbitrary(http.schema.path) : constant(undefined)
     const raw = arbitrary(APIGatewayProxyEvent)
 
     return raw.chain((r) => {
@@ -49,5 +52,5 @@ export function httpEvent<
                 },
             }
         })
-    }) as unknown as Dependent<HTTPRequest<HttpB, HttpP, HttpQ, HttpH, GV>>
+    }) as unknown as Dependent<HTTPRequest<Body, Path, Query, Headers, GV>>
 }

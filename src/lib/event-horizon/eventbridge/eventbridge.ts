@@ -5,14 +5,14 @@ import { tuple, unknown } from '@skyleague/axioms'
 import type { EventBridgeEvent, EventBridgeHandler } from '@skyleague/event-horizon'
 import { arbitrary } from '@skyleague/therefore'
 
-export function eventBridgeEvent<C = never, S = never, P = unknown, R = unknown>(
-    definition: EventBridgeHandler<C, S, P, R>
-): Dependent<EventBridgeEvent<P>> {
+export function eventBridgeEvent<Configuration = never, Service = never, Profile = never, Payload = unknown, Result = unknown>(
+    definition: EventBridgeHandler<Configuration, Service, Profile, Payload, Result>
+): Dependent<EventBridgeEvent<Payload>> {
     const { eventBridge } = definition
     const record = arbitrary(AWSEventBridgeEvent)
     const payload = eventBridge.schema.payload !== undefined ? arbitrary(eventBridge.schema.payload) : unknown()
     return tuple(record, payload).map(([r, p]) => ({
         raw: r,
         payload: p,
-    })) as unknown as Dependent<EventBridgeEvent<P>>
+    })) as unknown as Dependent<EventBridgeEvent<Payload>>
 }
