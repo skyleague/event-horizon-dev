@@ -55,7 +55,6 @@
   "dependencies": {
     "@skyleague/axioms": "^1.9.0",
     "@skyleague/event-horizon": "^1.26.2",
-    "@skyleague/space-junk": "^1.2.1",
     "@skyleague/therefore": "^1.20.2",
     "@types/express": "^4.17.14",
     "express": "^4.18.2",

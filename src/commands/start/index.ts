@@ -2,9 +2,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { context } from '../../lib'
+
 import { entriesOf, random, valuesOf } from '@skyleague/axioms'
 import type { EventHandler } from '@skyleague/event-horizon/src/handlers/types'
-import { arbitraryContext } from '@skyleague/space-junk'
 import type { APIGatewayProxyHandler, APIGatewayProxyResult } from 'aws-lambda'
 import express from 'express'
 import Router from 'express-promise-router'
@@ -28,6 +29,7 @@ export async function handler(argv: ReturnType<typeof builder>['argv']): Promise
 
     if (debug) {
         process.env.IS_DEBUG = 'true'
+        process.env.POWERTOOLS_DEV = 'true'
     }
 
     const router = Router()
@@ -48,7 +50,7 @@ export async function handler(argv: ReturnType<typeof builder>['argv']): Promise
                         pathParameters: req.params,
                         body: req.body,
                     } as any,
-                    random(await arbitraryContext()).raw,
+                    random(await context()).raw,
                     {} as any
                 )) as APIGatewayProxyResult
 
