@@ -4,6 +4,7 @@ import { mock } from '../../test'
 import type { Arbitrary, Dependent } from '@skyleague/axioms'
 import { constant, isFunction, object, random, string } from '@skyleague/axioms'
 import type { Config, EventHandlerDefinition, LambdaContext, Logger, Metrics, Services, Tracer } from '@skyleague/event-horizon'
+import type { Schema } from '@skyleague/therefore'
 import { arbitrary } from '@skyleague/therefore'
 import type { Context as AwsContext } from 'aws-lambda'
 
@@ -11,14 +12,19 @@ export interface ContextOptions {
     exhaustive?: boolean
 }
 
-export async function context<C = never, S = never>(
+export async function context<Configuration = never, Service = never, Profile = never>(
     {
         config,
         services,
+        profile,
         isSensitive,
-    }: Omit<EventHandlerDefinition, 'config' | 'services'> & { config?: Config<C>; services?: Services<C, S> } = {},
+    }: Omit<EventHandlerDefinition, 'config' | 'services'> & {
+        config?: Config<Configuration>
+        services?: Services<Configuration, Service>
+        profile?: Schema<Profile>
+    } = {},
     options: ContextOptions = {}
-): Promise<Dependent<LambdaContext<C, S> & { mockClear: () => void }>> {
+): Promise<Dependent<LambdaContext<Configuration, Service, Profile> & { mockClear: () => void }>> {
     const { exhaustive = false } = options
     const configObj = isFunction(config) ? await config() : config
     const ctxArb = arbitrary(Context) as Dependent<AwsContext>
@@ -30,8 +36,9 @@ export async function context<C = never, S = never>(
         traceId: string({ minLength: 2 }),
         isSensitive: constant(isSensitive ?? false),
         raw: exhaustive ? ctxArb : constant(random(ctxArb)),
-        config: constant(configObj) as Arbitrary<C>,
-        services: constant(isFunction(services) ? await services(configObj as C) : services) as Arbitrary<S>,
+        config: constant(configObj) as Arbitrary<Configuration>,
+        services: constant(isFunction(services) ? await services(configObj as Configuration) : services) as Arbitrary<Service>,
+        profile: constant(profile) as Arbitrary<Profile>,
     })
         .map((o) => {
             return {

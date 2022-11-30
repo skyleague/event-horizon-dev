@@ -5,14 +5,20 @@ import { tuple, unknown } from '@skyleague/axioms'
 import type { FirehoseTransformationEvent, FirehoseTransformationHandler } from '@skyleague/event-horizon'
 import { arbitrary } from '@skyleague/therefore'
 
-export function firehoseTransformationEvent<C = never, S = never, P = unknown, R = unknown>(
-    definition: FirehoseTransformationHandler<C, S, P, R>
-): Dependent<FirehoseTransformationEvent<P>> {
+export function firehoseTransformationEvent<
+    Configuration = never,
+    Service = never,
+    Profile = never,
+    Payload = unknown,
+    Result = unknown
+>(
+    definition: FirehoseTransformationHandler<Configuration, Service, Profile, Payload, Result>
+): Dependent<FirehoseTransformationEvent<Payload>> {
     const { firehose } = definition
     const record = arbitrary(FirehoseTransformationEventRecord)
     const payload = firehose.schema.payload !== undefined ? arbitrary(firehose.schema.payload) : unknown()
     return tuple(record, payload).map(([r, p]) => ({
         raw: r,
         payload: p,
-    })) as unknown as Dependent<FirehoseTransformationEvent<P>>
+    })) as unknown as Dependent<FirehoseTransformationEvent<Payload>>
 }
