@@ -18,7 +18,7 @@ export async function context<Configuration = never, Service = never, Profile = 
         services,
         profile,
         isSensitive,
-    }: Omit<EventHandlerDefinition, 'config' | 'services'> & {
+    }: Omit<EventHandlerDefinition, 'config' | 'profile' | 'services'> & {
         config?: Config<Configuration>
         services?: Services<Configuration, Service>
         profile?: Schema<Profile>
