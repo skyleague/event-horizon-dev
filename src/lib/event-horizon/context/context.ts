@@ -4,7 +4,7 @@ import { mock } from '../../test'
 import type { Arbitrary, Dependent } from '@skyleague/axioms'
 import { constant, isFunction, object, random, string } from '@skyleague/axioms'
 import type { Config, EventHandlerDefinition, LambdaContext, Logger, Metrics, Services, Tracer } from '@skyleague/event-horizon'
-import type { Schema } from '@skyleague/therefore'
+import type { ProfileSchema } from '@skyleague/event-horizon/src/events/common/profile-handler'
 import { arbitrary } from '@skyleague/therefore'
 import type { Context as AwsContext } from 'aws-lambda'
 
@@ -21,7 +21,7 @@ export async function context<Configuration = never, Service = never, Profile = 
     }: Omit<EventHandlerDefinition, 'config' | 'profile' | 'services'> & {
         config?: Config<Configuration>
         services?: Services<Configuration, Service>
-        profile?: Schema<Profile>
+        profile?: ProfileSchema<Profile>
     } = {},
     options: ContextOptions = {}
 ): Promise<Dependent<LambdaContext<Configuration, Service, Profile> & { mockClear: () => void }>> {
