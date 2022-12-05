@@ -16,19 +16,10 @@
   "node-standards": {
     "type": "yargs-cli",
     "template": {
-      "exclude": [
-        "bin/run"
-      ]
+      "exclude": ["bin/run"]
     }
   },
-  "files": [
-    "bin",
-    ".main.js",
-    ".main.js.map",
-    "index.d.ts",
-    "src/**/*.d.ts",
-    "package.json"
-  ],
+  "files": ["bin", ".main.js", ".main.js.map", "index.d.ts", "src/**/*.d.ts", "package.json"],
   "scripts": {
     "build": "npx ts-node esbuild.config.ts",
     "build:clean": "npx tsc --build --clean && rm .main.js && rm .main.js.map",
@@ -47,14 +38,14 @@
     "test": "npx jest"
   },
   "devDependencies": {
-    "@skyleague/event-horizon": "^2.2.0",
+    "@skyleague/event-horizon": "^2.2.2",
     "@skyleague/node-standards": "^1.10.0",
     "@types/aws-lambda": "^8.10.109",
     "@types/source-map-support": "^0.5.6",
     "typescript": "^4.9.3"
   },
   "peerDependencies": {
-    "@skyleague/event-horizon": "^2.2.0"
+    "@skyleague/event-horizon": "^2.2.2"
   },
   "dependencies": {
     "@skyleague/axioms": "^1.9.0",
