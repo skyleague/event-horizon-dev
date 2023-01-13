@@ -4,7 +4,7 @@ import { mock } from '../../test'
 import type { Arbitrary, Dependent } from '@skyleague/axioms'
 import { constant, isFunction, object, random, string } from '@skyleague/axioms'
 import type { Config, EventHandlerDefinition, LambdaContext, Logger, Metrics, Services, Tracer } from '@skyleague/event-horizon'
-import type { ProfileSchema } from '@skyleague/event-horizon/src/events/common/profile-handler'
+import type { ProfileSchema } from '@skyleague/event-horizon/dist/events/common/profile-handler'
 import { arbitrary } from '@skyleague/therefore'
 import type { Context as AwsContext } from 'aws-lambda'
 

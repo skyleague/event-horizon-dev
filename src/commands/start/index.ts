@@ -5,7 +5,7 @@
 import { context } from '../../lib'
 
 import { entriesOf, random, valuesOf } from '@skyleague/axioms'
-import type { EventHandler } from '@skyleague/event-horizon/src/handlers/types'
+import type { EventHandler } from '@skyleague/event-horizon/dist/handlers/types'
 import type { APIGatewayProxyHandler, APIGatewayProxyResult } from 'aws-lambda'
 import express from 'express'
 import Router from 'express-promise-router'

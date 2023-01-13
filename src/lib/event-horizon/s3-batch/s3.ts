@@ -2,7 +2,7 @@ import { S3BatchEvent, S3BatchEventTask } from '../../aws'
 
 import type { Dependent } from '@skyleague/axioms'
 import { omit, tuple } from '@skyleague/axioms'
-import type { S3BatchTask } from '@skyleague/event-horizon/src/events/s3-batch/types'
+import type { S3BatchTask } from '@skyleague/event-horizon/dist/events/s3-batch/types'
 import { arbitrary } from '@skyleague/therefore'
 
 export function s3BatchTask(): Dependent<S3BatchTask> {
