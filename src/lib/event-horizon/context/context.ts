@@ -46,6 +46,7 @@ export async function context<Configuration = never, Service = never, Profile = 
                 mockClear: () => {
                     // reset state on each evaluation
                     o.logger.mockClear()
+                    o.logger.child.mockReturnValue(o.logger)
                     o.tracer.mockClear()
                     o.metrics.mockClear()
                 },
