@@ -28,6 +28,7 @@ export async function context<Configuration = never, Service = never, Profile = 
     const { exhaustive = false } = options
     const configObj = isFunction(config) ? await config() : config
     const ctxArb = arbitrary(Context) as Dependent<AwsContext>
+    const awsLoggerInstance = mock<Logger['instance']>()
     return object({
         logger: constant(mock<Logger>()),
         tracer: constant(mock<Tracer>()),
@@ -47,8 +48,10 @@ export async function context<Configuration = never, Service = never, Profile = 
                     // reset state on each evaluation
                     o.logger.mockClear()
                     o.logger.child.mockReturnValue(o.logger)
+                    o.logger.instance = awsLoggerInstance
                     o.tracer.mockClear()
                     o.metrics.mockClear()
+                    awsLoggerInstance.mockClear()
                 },
             }
         })
