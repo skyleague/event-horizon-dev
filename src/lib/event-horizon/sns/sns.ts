@@ -1,4 +1,4 @@
-import { SNSEventRecord } from '../../aws/sns/sns.schema'
+import { SNSEventRecord } from '../../aws/sns/sns.schema.js'
 
 import type { Dependent } from '@skyleague/axioms'
 import { object, unknown } from '@skyleague/axioms'

@@ -1,4 +1,4 @@
-import type { Context } from './context.type'
+import type { Context } from './context.type.js'
 
 import type { Context as LambdaContext } from 'aws-lambda'
 

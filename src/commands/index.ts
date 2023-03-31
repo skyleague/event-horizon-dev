@@ -1,1 +1,1 @@
-export * as hello from './start'
+export * as hello from './start/index.js'

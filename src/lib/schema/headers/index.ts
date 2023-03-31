@@ -1,1 +1,1 @@
-export { $headers } from './headers'
+export { $headers } from './headers.js'

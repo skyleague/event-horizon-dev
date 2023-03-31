@@ -20,7 +20,8 @@ export interface EventBridgeEvent {
 }
 
 export const EventBridgeEvent = {
-    validate: require('./schemas/event-bridge-event.schema.js') as ValidateFunction<EventBridgeEvent>,
+    validate: (await import('./schemas/event-bridge-event.schema.js'))
+        .validate10 as unknown as ValidateFunction<EventBridgeEvent>,
     get schema() {
         return EventBridgeEvent.validate.schema
     },

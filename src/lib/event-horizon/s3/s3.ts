@@ -1,4 +1,4 @@
-import { S3EventRecord } from '../../aws/s3/s3.type'
+import { S3EventRecord } from '../../aws/s3/s3.type.js'
 
 import type { Dependent } from '@skyleague/axioms'
 import type { S3Event } from '@skyleague/event-horizon'

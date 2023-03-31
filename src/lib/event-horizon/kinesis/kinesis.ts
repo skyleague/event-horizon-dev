@@ -1,4 +1,4 @@
-import { KinesisStreamRecord } from '../../aws/kinesis'
+import { KinesisStreamRecord } from '../../aws/kinesis/index.js'
 
 import type { Dependent } from '@skyleague/axioms'
 import { tuple, unknown } from '@skyleague/axioms'

@@ -1,6 +1,6 @@
-import { context } from './context'
+import { context } from './context.js'
 
-import { Context } from '../../aws'
+import { Context } from '../../aws/index.js'
 
 import { forAll } from '@skyleague/axioms'
 

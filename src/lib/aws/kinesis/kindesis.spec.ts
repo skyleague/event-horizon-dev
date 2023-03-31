@@ -1,4 +1,4 @@
-import type { KinesisStreamEvent } from './kinesis.type'
+import type { KinesisStreamEvent } from './kinesis.type.js'
 
 import type { KinesisStreamEvent as LambdaKinesisStreamEvent } from 'aws-lambda'
 

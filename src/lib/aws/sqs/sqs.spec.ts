@@ -1,4 +1,4 @@
-import type { SQSRecord } from './sqs.type'
+import type { SQSRecord } from './sqs.type.js'
 
 import type { SQSRecord as LambdaSqsRecord } from 'aws-lambda'
 

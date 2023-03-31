@@ -1,1 +1,1 @@
-export * from './context.type'
+export * from './context.type.js'

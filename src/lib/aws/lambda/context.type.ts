@@ -6,9 +6,10 @@
 import AjvValidator from 'ajv'
 import type { ValidateFunction } from 'ajv'
 
-export interface CognitoIdentity {
-    cognitoIdentityId: string
-    cognitoIdentityPoolId: string
+export interface ClientContext {
+    client: ClientContextClient
+    Custom?: unknown
+    env: ClientContextEnv
 }
 
 export interface ClientContextClient {
@@ -27,10 +28,9 @@ export interface ClientContextEnv {
     locale: string
 }
 
-export interface ClientContext {
-    client: ClientContextClient
-    Custom?: unknown
-    env: ClientContextEnv
+export interface CognitoIdentity {
+    cognitoIdentityId: string
+    cognitoIdentityPoolId: string
 }
 
 export interface Context {
@@ -47,7 +47,7 @@ export interface Context {
 }
 
 export const Context = {
-    validate: require('./schemas/context.schema.js') as ValidateFunction<Context>,
+    validate: (await import('./schemas/context.schema.js')).validate10 as unknown as ValidateFunction<Context>,
     get schema() {
         return Context.validate.schema
     },

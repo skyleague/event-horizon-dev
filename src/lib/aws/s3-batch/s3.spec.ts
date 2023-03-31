@@ -1,4 +1,4 @@
-import type { S3BatchEvent } from './s3.type'
+import type { S3BatchEvent } from './s3.type.js'
 
 import type { S3BatchEvent as LambdaS3BatchEvent } from 'aws-lambda'
 

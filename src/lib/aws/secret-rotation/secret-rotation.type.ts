@@ -13,7 +13,8 @@ export interface SecretRotationEvent {
 }
 
 export const SecretRotationEvent = {
-    validate: require('./schemas/secret-rotation-event.schema.js') as ValidateFunction<SecretRotationEvent>,
+    validate: (await import('./schemas/secret-rotation-event.schema.js'))
+        .validate10 as unknown as ValidateFunction<SecretRotationEvent>,
     get schema() {
         return SecretRotationEvent.validate.schema
     },

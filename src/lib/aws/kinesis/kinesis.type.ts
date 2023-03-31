@@ -6,13 +6,26 @@
 import AjvValidator from 'ajv'
 import type { ValidateFunction } from 'ajv'
 
-export interface KinesisStreamRecordPayload {
-    approximateArrivalTimestamp: number
-    data: string
-    kinesisSchemaVersion: string
-    partitionKey: string
-    sequenceNumber: string
+export interface KinesisStreamEvent {
+    Records: KinesisStreamRecord[]
 }
+
+export const KinesisStreamEvent = {
+    validate: (await import('./schemas/kinesis-stream-event.schema.js'))
+        .validate10 as unknown as ValidateFunction<KinesisStreamEvent>,
+    get schema() {
+        return KinesisStreamEvent.validate.schema
+    },
+    get errors() {
+        return KinesisStreamEvent.validate.errors ?? undefined
+    },
+    is: (o: unknown): o is KinesisStreamEvent => KinesisStreamEvent.validate(o) === true,
+    assert: (o: unknown) => {
+        if (!KinesisStreamEvent.validate(o)) {
+            throw new AjvValidator.ValidationError(KinesisStreamEvent.errors ?? [])
+        }
+    },
+} as const
 
 export interface KinesisStreamRecord {
     awsRegion: string
@@ -26,7 +39,8 @@ export interface KinesisStreamRecord {
 }
 
 export const KinesisStreamRecord = {
-    validate: require('./schemas/kinesis-stream-record.schema.js') as ValidateFunction<KinesisStreamRecord>,
+    validate: (await import('./schemas/kinesis-stream-record.schema.js'))
+        .validate10 as unknown as ValidateFunction<KinesisStreamRecord>,
     get schema() {
         return KinesisStreamRecord.validate.schema
     },
@@ -41,22 +55,10 @@ export const KinesisStreamRecord = {
     },
 } as const
 
-export interface KinesisStreamEvent {
-    Records: KinesisStreamRecord[]
+export interface KinesisStreamRecordPayload {
+    approximateArrivalTimestamp: number
+    data: string
+    kinesisSchemaVersion: string
+    partitionKey: string
+    sequenceNumber: string
 }
-
-export const KinesisStreamEvent = {
-    validate: require('./schemas/kinesis-stream-event.schema.js') as ValidateFunction<KinesisStreamEvent>,
-    get schema() {
-        return KinesisStreamEvent.validate.schema
-    },
-    get errors() {
-        return KinesisStreamEvent.validate.errors ?? undefined
-    },
-    is: (o: unknown): o is KinesisStreamEvent => KinesisStreamEvent.validate(o) === true,
-    assert: (o: unknown) => {
-        if (!KinesisStreamEvent.validate(o)) {
-            throw new AjvValidator.ValidationError(KinesisStreamEvent.errors ?? [])
-        }
-    },
-} as const

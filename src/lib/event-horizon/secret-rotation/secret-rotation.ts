@@ -1,4 +1,4 @@
-import { SecretRotationEvent } from '../../aws/secret-rotation/secret-rotation.type'
+import { SecretRotationEvent } from '../../aws/secret-rotation/secret-rotation.type.js'
 
 import type { Dependent } from '@skyleague/axioms'
 import type { SecretRotationRequest, SecretRotationServices } from '@skyleague/event-horizon'
