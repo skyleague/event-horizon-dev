@@ -1,4 +1,4 @@
-import { APIGatewayProxyEvent } from '../../aws/apigateway'
+import { APIGatewayProxyEvent } from '../../aws/apigateway/index.js'
 
 import type { Dependent } from '@skyleague/axioms'
 import { constant, object } from '@skyleague/axioms'

@@ -1,1 +1,1 @@
-export { firehoseTransformationEvent } from './firehose'
+export { firehoseTransformationEvent } from './firehose.js'

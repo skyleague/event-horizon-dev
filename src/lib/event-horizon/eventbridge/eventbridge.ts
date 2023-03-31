@@ -1,4 +1,4 @@
-import { EventBridgeEvent as AWSEventBridgeEvent } from '../../aws'
+import { EventBridgeEvent as AWSEventBridgeEvent } from '../../aws/index.js'
 
 import type { Dependent } from '@skyleague/axioms'
 import { tuple, unknown } from '@skyleague/axioms'

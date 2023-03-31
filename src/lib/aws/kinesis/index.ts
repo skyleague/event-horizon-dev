@@ -1,1 +1,1 @@
-export * from './kinesis.type'
+export * from './kinesis.type.js'

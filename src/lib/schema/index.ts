@@ -1,2 +1,2 @@
-export { $query } from './query'
-export { $headers } from './headers'
+export { $query } from './query/index.js'
+export { $headers } from './headers/index.js'

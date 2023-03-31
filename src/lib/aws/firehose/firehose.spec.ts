@@ -1,4 +1,4 @@
-import type { FirehoseTransformationEvent } from './firehose.type'
+import type { FirehoseTransformationEvent } from './firehose.type.js'
 
 import type { FirehoseTransformationEvent as LambdaFirehoseTransformationEvent } from 'aws-lambda'
 

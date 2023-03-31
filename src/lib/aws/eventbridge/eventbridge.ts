@@ -1,5 +1,5 @@
 import { $unknown, $object, $string, $array, $optional, $validator } from '@skyleague/therefore'
-import type { ThereforeSchema } from '@skyleague/therefore/src/lib/primitives/types'
+import type { ThereforeSchema } from '@skyleague/therefore/src/lib/primitives/types.js'
 
 export function $eventBridge({
     detailType = $string(),

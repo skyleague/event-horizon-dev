@@ -1,1 +1,1 @@
-export * from './apigateway.type'
+export * from './apigateway.type.js'

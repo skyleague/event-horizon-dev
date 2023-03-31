@@ -1,4 +1,4 @@
-import type { EventBridgeEvent } from './eventbridge.type'
+import type { EventBridgeEvent } from './eventbridge.type.js'
 
 import type { EventBridgeEvent as LambdaEventBridgeEvent } from 'aws-lambda'
 

@@ -1,10 +1,10 @@
-import { Context } from '../../aws/lambda'
-import { mockLogger, mockMetrics, mockTracer } from '../../test/mock/mock'
+import { Context } from '../../aws/lambda/index.js'
+import { mockLogger, mockMetrics, mockTracer } from '../../test/mock/mock.js'
 
 import type { Arbitrary, Dependent } from '@skyleague/axioms'
 import { constant, isFunction, object, random, string } from '@skyleague/axioms'
 import type { Config, EventHandlerDefinition, LambdaContext, Services } from '@skyleague/event-horizon'
-import type { ProfileSchema } from '@skyleague/event-horizon/dist/events/common/profile-handler'
+import type { ProfileSchema } from '@skyleague/event-horizon/src/events/common/profile-handler.js'
 import { arbitrary } from '@skyleague/therefore'
 import type { Context as AwsContext } from 'aws-lambda'
 

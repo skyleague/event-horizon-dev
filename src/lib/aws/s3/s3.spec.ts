@@ -1,4 +1,4 @@
-import type { S3Event } from './s3.type'
+import type { S3Event } from './s3.type.js'
 
 import type { S3Event as LambdaS3Event } from 'aws-lambda'
 

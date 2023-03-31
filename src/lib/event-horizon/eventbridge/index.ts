@@ -1,1 +1,1 @@
-export { eventBridgeEvent } from './eventbridge'
+export { eventBridgeEvent } from './eventbridge.js'

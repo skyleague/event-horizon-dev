@@ -1,4 +1,4 @@
-import { FirehoseTransformationEventRecord } from '../../aws/firehose'
+import { FirehoseTransformationEventRecord } from '../../aws/firehose/index.js'
 
 import type { Dependent } from '@skyleague/axioms'
 import { tuple, unknown } from '@skyleague/axioms'

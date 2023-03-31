@@ -1,1 +1,1 @@
-export { sqsEvent } from './sqs'
+export { sqsEvent } from './sqs.js'
