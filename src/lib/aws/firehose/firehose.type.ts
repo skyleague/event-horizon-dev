@@ -14,30 +14,6 @@ export interface FirehoseRecordMetadata {
     subsequenceNumber: string
 }
 
-export interface FirehoseTransformationEventRecord {
-    recordId: string
-    approximateArrivalTimestamp: number
-    data: string
-    kinesisRecordMetadata?: FirehoseRecordMetadata | undefined
-}
-
-export const FirehoseTransformationEventRecord = {
-    validate:
-        require('./schemas/firehose-transformation-event-record.schema.js') as ValidateFunction<FirehoseTransformationEventRecord>,
-    get schema() {
-        return FirehoseTransformationEventRecord.validate.schema
-    },
-    get errors() {
-        return FirehoseTransformationEventRecord.validate.errors ?? undefined
-    },
-    is: (o: unknown): o is FirehoseTransformationEventRecord => FirehoseTransformationEventRecord.validate(o) === true,
-    assert: (o: unknown) => {
-        if (!FirehoseTransformationEventRecord.validate(o)) {
-            throw new AjvValidator.ValidationError(FirehoseTransformationEventRecord.errors ?? [])
-        }
-    },
-} as const
-
 export interface FirehoseTransformationEvent {
     invocationId: string
     deliveryStreamArn: string
@@ -47,7 +23,8 @@ export interface FirehoseTransformationEvent {
 }
 
 export const FirehoseTransformationEvent = {
-    validate: require('./schemas/firehose-transformation-event.schema.js') as ValidateFunction<FirehoseTransformationEvent>,
+    validate: (await import('./schemas/firehose-transformation-event.schema.js'))
+        .validate10 as unknown as ValidateFunction<FirehoseTransformationEvent>,
     get schema() {
         return FirehoseTransformationEvent.validate.schema
     },
@@ -58,6 +35,30 @@ export const FirehoseTransformationEvent = {
     assert: (o: unknown) => {
         if (!FirehoseTransformationEvent.validate(o)) {
             throw new AjvValidator.ValidationError(FirehoseTransformationEvent.errors ?? [])
+        }
+    },
+} as const
+
+export interface FirehoseTransformationEventRecord {
+    recordId: string
+    approximateArrivalTimestamp: number
+    data: string
+    kinesisRecordMetadata?: FirehoseRecordMetadata | undefined
+}
+
+export const FirehoseTransformationEventRecord = {
+    validate: (await import('./schemas/firehose-transformation-event-record.schema.js'))
+        .validate10 as unknown as ValidateFunction<FirehoseTransformationEventRecord>,
+    get schema() {
+        return FirehoseTransformationEventRecord.validate.schema
+    },
+    get errors() {
+        return FirehoseTransformationEventRecord.validate.errors ?? undefined
+    },
+    is: (o: unknown): o is FirehoseTransformationEventRecord => FirehoseTransformationEventRecord.validate(o) === true,
+    assert: (o: unknown) => {
+        if (!FirehoseTransformationEventRecord.validate(o)) {
+            throw new AjvValidator.ValidationError(FirehoseTransformationEventRecord.errors ?? [])
         }
     },
 } as const

@@ -1,4 +1,4 @@
-import { SQSRecord } from '../../aws/sqs/sqs.type'
+import { SQSRecord } from '../../aws/sqs/sqs.type.js'
 
 import type { Dependent } from '@skyleague/axioms'
 import { object, unknown } from '@skyleague/axioms'

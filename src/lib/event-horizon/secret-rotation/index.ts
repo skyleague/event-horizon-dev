@@ -1,1 +1,1 @@
-export { secretRotationEvent } from './secret-rotation'
+export { secretRotationEvent } from './secret-rotation.js'

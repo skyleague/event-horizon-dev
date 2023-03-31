@@ -1,1 +1,1 @@
-export * from './s3.type'
+export * from './s3.type.js'

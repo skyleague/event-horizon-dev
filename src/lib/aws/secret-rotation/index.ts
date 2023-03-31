@@ -1,1 +1,1 @@
-export * from './secret-rotation.type'
+export * from './secret-rotation.type.js'

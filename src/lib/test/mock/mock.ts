@@ -1,3 +1,6 @@
+import { Logger as AwsLogger } from '@aws-lambda-powertools/logger'
+import { Metrics as AwsMetrics } from '@aws-lambda-powertools/metrics'
+import { Tracer as AwsTracer } from '@aws-lambda-powertools/tracer'
 import type { Logger, Metrics, Tracer } from '@skyleague/event-horizon'
 
 export function mock<T>(): jest.MaybeMocked<T> & { mockClear(): void } {
@@ -19,10 +22,7 @@ export function mock<T>(): jest.MaybeMocked<T> & { mockClear(): void } {
 }
 
 export function mockLogger(): jest.MaybeMocked<Logger> & { mockClear: () => void } {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
-    const { Logger: AwsLogger } = require('@aws-lambda-powertools/logger')
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    const instance = new AwsLogger() as Logger['instance']
+    const instance = new AwsLogger()
     const shouldLogEvent = jest.spyOn(instance, 'shouldLogEvent')
     const logger: jest.MaybeMocked<Logger> & { mockClear: () => void } = {
         instance,
@@ -51,10 +51,7 @@ export function mockLogger(): jest.MaybeMocked<Logger> & { mockClear: () => void
 }
 
 export function mockTracer(): jest.MaybeMocked<Tracer> & { mockClear: () => void } {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
-    const { Tracer: AwsTracer } = require('@aws-lambda-powertools/tracer')
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    const instance = new AwsTracer() as Tracer['instance']
+    const instance = new AwsTracer()
     const tracer: jest.MaybeMocked<Tracer> & { mockClear: () => void } = {
         instance,
         trace: jest.fn(),
@@ -68,10 +65,7 @@ export function mockTracer(): jest.MaybeMocked<Tracer> & { mockClear: () => void
 }
 
 export function mockMetrics(): jest.MaybeMocked<Metrics> & { mockClear: () => void } {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
-    const { Metrics: AwsMetrics } = require('@aws-lambda-powertools/metrics')
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    const instance = new AwsMetrics() as Metrics['instance']
+    const instance = new AwsMetrics()
     const metrics: jest.MaybeMocked<Metrics> & { mockClear: () => void } = {
         instance,
         add: jest.fn(),
