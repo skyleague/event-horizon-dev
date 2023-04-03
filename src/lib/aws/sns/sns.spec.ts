@@ -1,4 +1,4 @@
-import type { SNSEvent } from './sns.type'
+import type { SNSEvent } from './sns.type.js'
 
 import type { SNSEvent as LambdaSnsEvent } from 'aws-lambda'
 

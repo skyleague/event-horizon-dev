@@ -1,1 +1,1 @@
-export * from './sns.type'
+export * from './sns.type.js'

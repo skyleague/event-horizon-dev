@@ -6,14 +6,48 @@
 import AjvValidator from 'ajv'
 import type { ValidateFunction } from 'ajv'
 
-export interface SNSMessageAttribute {
-    Type: string
-    Value: string
+export interface SNSEvent {
+    Records: SNSEventRecord[]
 }
 
-export interface SNSMessageAttributes {
-    [k: string]: SNSMessageAttribute | undefined
+export const SNSEvent = {
+    validate: (await import('./schemas/sns-event.schema.js')).validate10 as unknown as ValidateFunction<SNSEvent>,
+    get schema() {
+        return SNSEvent.validate.schema
+    },
+    get errors() {
+        return SNSEvent.validate.errors ?? undefined
+    },
+    is: (o: unknown): o is SNSEvent => SNSEvent.validate(o) === true,
+    assert: (o: unknown) => {
+        if (!SNSEvent.validate(o)) {
+            throw new AjvValidator.ValidationError(SNSEvent.errors ?? [])
+        }
+    },
+} as const
+
+export interface SNSEventRecord {
+    EventVersion: string
+    EventSubscriptionArn: string
+    EventSource: string
+    Sns: SNSMessage
 }
+
+export const SNSEventRecord = {
+    validate: (await import('./schemas/sns-event-record.schema.js')).validate10 as unknown as ValidateFunction<SNSEventRecord>,
+    get schema() {
+        return SNSEventRecord.validate.schema
+    },
+    get errors() {
+        return SNSEventRecord.validate.errors ?? undefined
+    },
+    is: (o: unknown): o is SNSEventRecord => SNSEventRecord.validate(o) === true,
+    assert: (o: unknown) => {
+        if (!SNSEventRecord.validate(o)) {
+            throw new AjvValidator.ValidationError(SNSEventRecord.errors ?? [])
+        }
+    },
+} as const
 
 export interface SNSMessage {
     SignatureVersion: string
@@ -30,45 +64,11 @@ export interface SNSMessage {
     Token?: string
 }
 
-export interface SNSEventRecord {
-    EventVersion: string
-    EventSubscriptionArn: string
-    EventSource: string
-    Sns: SNSMessage
+export interface SNSMessageAttribute {
+    Type: string
+    Value: string
 }
 
-export const SNSEventRecord = {
-    validate: require('./schemas/sns-event-record.schema.js') as ValidateFunction<SNSEventRecord>,
-    get schema() {
-        return SNSEventRecord.validate.schema
-    },
-    get errors() {
-        return SNSEventRecord.validate.errors ?? undefined
-    },
-    is: (o: unknown): o is SNSEventRecord => SNSEventRecord.validate(o) === true,
-    assert: (o: unknown) => {
-        if (!SNSEventRecord.validate(o)) {
-            throw new AjvValidator.ValidationError(SNSEventRecord.errors ?? [])
-        }
-    },
-} as const
-
-export interface SNSEvent {
-    Records: SNSEventRecord[]
+export interface SNSMessageAttributes {
+    [k: string]: SNSMessageAttribute | undefined
 }
-
-export const SNSEvent = {
-    validate: require('./schemas/sns-event.schema.js') as ValidateFunction<SNSEvent>,
-    get schema() {
-        return SNSEvent.validate.schema
-    },
-    get errors() {
-        return SNSEvent.validate.errors ?? undefined
-    },
-    is: (o: unknown): o is SNSEvent => SNSEvent.validate(o) === true,
-    assert: (o: unknown) => {
-        if (!SNSEvent.validate(o)) {
-            throw new AjvValidator.ValidationError(SNSEvent.errors ?? [])
-        }
-    },
-} as const

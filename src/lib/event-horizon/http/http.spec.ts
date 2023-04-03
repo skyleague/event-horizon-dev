@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { httpEvent } from './http'
+import { httpEvent } from './http.js'
 
-import { APIGatewayProxyEvent } from '../../aws/apigateway'
+import { APIGatewayProxyEvent } from '../../aws/apigateway/index.js'
 
 import { forAll, isString } from '@skyleague/axioms'
 

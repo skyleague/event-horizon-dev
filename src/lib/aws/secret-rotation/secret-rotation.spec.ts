@@ -1,4 +1,4 @@
-import type { SecretRotationEvent } from './secret-rotation.type'
+import type { SecretRotationEvent } from './secret-rotation.type.js'
 
 import type { SecretsManagerRotationEvent as LambdaSecretRotationEvent } from 'aws-lambda'
 

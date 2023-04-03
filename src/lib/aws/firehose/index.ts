@@ -1,1 +1,1 @@
-export * from './firehose.type'
+export * from './firehose.type.js'

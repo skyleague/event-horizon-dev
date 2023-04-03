@@ -1,3 +1,3 @@
-import { $eventBridge } from './eventbridge'
+import { $eventBridge } from './eventbridge.js'
 
 export const eventBridgeEvent = $eventBridge()

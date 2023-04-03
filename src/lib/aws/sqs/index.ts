@@ -1,1 +1,1 @@
-export * from './sqs.type'
+export * from './sqs.type.js'

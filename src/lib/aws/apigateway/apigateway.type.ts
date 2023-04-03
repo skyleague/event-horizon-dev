@@ -6,34 +6,6 @@
 import AjvValidator from 'ajv'
 import type { ValidateFunction } from 'ajv'
 
-export interface APIGatewayProxyEventHeaders {
-    [k: string]: string | undefined
-}
-
-export interface APIGatewayProxyEventMultiValueHeaders {
-    [k: string]: string[] | undefined
-}
-
-export interface APIGatewayProxyEventPathParameters {
-    [k: string]: string | undefined
-}
-
-export interface APIGatewayProxyEventQueryStringParameters {
-    [k: string]: string | undefined
-}
-
-export interface APIGatewayProxyEventMultiValueQueryStringParameters {
-    [k: string]: string[] | undefined
-}
-
-export interface APIGatewayProxyEventStageVariables {
-    [k: string]: string | undefined
-}
-
-export type APIGatewayEventDefaultAuthorizerContext = null | null | {
-    [k: string]: unknown | undefined
-}
-
 export interface APIGatewayEventClientCertificate {
     clientCertPem: string
     serialNumber: string
@@ -43,6 +15,10 @@ export interface APIGatewayEventClientCertificate {
         notAfter: string
         notBefore: string
     }
+}
+
+export type APIGatewayEventDefaultAuthorizerContext = null | null | {
+    [k: string]: unknown | undefined
 }
 
 export interface APIGatewayEventIdentity {
@@ -104,7 +80,8 @@ export interface APIGatewayProxyEvent {
 }
 
 export const APIGatewayProxyEvent = {
-    validate: require('./schemas/api-gateway-proxy-event.schema.js') as ValidateFunction<APIGatewayProxyEvent>,
+    validate: (await import('./schemas/api-gateway-proxy-event.schema.js'))
+        .validate10 as unknown as ValidateFunction<APIGatewayProxyEvent>,
     get schema() {
         return APIGatewayProxyEvent.validate.schema
     },
@@ -118,3 +95,27 @@ export const APIGatewayProxyEvent = {
         }
     },
 } as const
+
+export interface APIGatewayProxyEventHeaders {
+    [k: string]: string | undefined
+}
+
+export interface APIGatewayProxyEventMultiValueHeaders {
+    [k: string]: string[] | undefined
+}
+
+export interface APIGatewayProxyEventMultiValueQueryStringParameters {
+    [k: string]: string[] | undefined
+}
+
+export interface APIGatewayProxyEventPathParameters {
+    [k: string]: string | undefined
+}
+
+export interface APIGatewayProxyEventQueryStringParameters {
+    [k: string]: string | undefined
+}
+
+export interface APIGatewayProxyEventStageVariables {
+    [k: string]: string | undefined
+}

@@ -1,17 +1,16 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { context } from '../../lib'
+import { context } from '../../lib/index.js'
 
 import { entriesOf, random, valuesOf } from '@skyleague/axioms'
-import type { EventHandler } from '@skyleague/event-horizon/dist/handlers/types'
+import type { EventHandler } from '@skyleague/event-horizon/src/handlers/types.js'
 import type { APIGatewayProxyHandler, APIGatewayProxyResult } from 'aws-lambda'
 import express from 'express'
 import Router from 'express-promise-router'
 import type { Argv } from 'yargs'
 
-import path from 'path'
+import path from 'node:path'
 
 export function builder(yargs: Argv): Argv<{ dir: string | undefined; debug?: boolean }> {
     return yargs.option('debug', { default: true }).positional('dir', {
@@ -42,7 +41,8 @@ export async function handler(argv: ReturnType<typeof builder>['argv']): Promise
 
             console.log(`${endpoint.http.method.toUpperCase()} http://localhost:3000${endpoint.http.path}`)
 
-            router[endpoint.http.method](translatedPath, async (req, res) => {
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            router[endpoint.http.method](translatedPath, async (req, res): Promise<void> => {
                 const result = (await (endpoint as unknown as APIGatewayProxyHandler)(
                     {
                         headers: req.headers as Record<string, string>,

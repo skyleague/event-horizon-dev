@@ -1,1 +1,1 @@
-export { kinesisEvent } from './kinesis'
+export { kinesisEvent } from './kinesis.js'

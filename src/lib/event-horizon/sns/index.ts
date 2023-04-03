@@ -1,1 +1,1 @@
-export { snsEvent } from './sns'
+export { snsEvent } from './sns.js'

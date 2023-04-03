@@ -13,7 +13,7 @@ import {
     $unknown,
     $validator,
 } from '@skyleague/therefore'
-import type { ThereforeSchema } from '@skyleague/therefore/src/lib/primitives/types'
+import type { ThereforeSchema } from '@skyleague/therefore/src/lib/primitives/types.js'
 
 export const APIGatewayProxyEventHeaders = $dict($string)
 export const APIGatewayProxyEventMultiValueHeaders = $dict($array($string))
