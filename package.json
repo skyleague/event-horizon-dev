@@ -1,6 +1,6 @@
 {
   "name": "@skyleague/event-horizon-dev",
-  "version": "1.0.0",
+  "version": "3.0.1",
   "description": "The accompanying development package for @skyleague/event-horizon.",
   "license": "MIT",
   "author": "SkyLeague Technologies B.V. <technologies@skyleague.io> (https://skyleague.io)",
@@ -70,7 +70,7 @@
     "typescript": "^5.0.2"
   },
   "peerDependencies": {
-    "@skyleague/event-horizon": "^4.0.0-beta.0"
+    "@skyleague/event-horizon": "^4.0.0"
   },
   "engines": {
     "node": ">=18"
