@@ -3,7 +3,8 @@ import { secretRotationEvent } from './secret-rotation.js'
 import { SecretRotationEvent } from '../../aws/secret-rotation/secret-rotation.type.js'
 
 import { forAll } from '@skyleague/axioms'
+import { it } from 'vitest'
 
-test('SecretRotationEvent === SecretRotationRequest.raw', () => {
+it('SecretRotationEvent === SecretRotationRequest.raw', () => {
     forAll(secretRotationEvent(), (r) => SecretRotationEvent.assert(r.raw))
 })

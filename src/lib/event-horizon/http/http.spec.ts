@@ -3,20 +3,21 @@ import { httpEvent } from './http.js'
 import { APIGatewayProxyEvent } from '../../aws/apigateway/index.js'
 
 import { forAll, isString } from '@skyleague/axioms'
+import { it, vi } from 'vitest'
 
-test('httpEvent === httpEvent', () => {
-    forAll(httpEvent({ http: { method: 'get', path: '/', handler: jest.fn(), schema: { responses: {} } } }), (e) =>
+it('httpEvent === httpEvent', () => {
+    forAll(httpEvent({ http: { method: 'get', path: '/', handler: vi.fn(), schema: { responses: {} } } }), (e) =>
         APIGatewayProxyEvent.assert(e.raw)
     )
 })
 
-test('httpEvent body === body', () => {
+it('httpEvent body === body', () => {
     forAll(
         httpEvent({
             http: {
                 method: 'get',
                 path: '/',
-                handler: jest.fn(),
+                handler: vi.fn(),
                 schema: { body: { schema: { type: 'string' } } as any, responses: {} },
             },
         }),
