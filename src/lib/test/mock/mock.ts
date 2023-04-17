@@ -2,9 +2,10 @@ import { Logger as AwsLogger } from '@aws-lambda-powertools/logger'
 import { Metrics as AwsMetrics } from '@aws-lambda-powertools/metrics'
 import { Tracer as AwsTracer } from '@aws-lambda-powertools/tracer'
 import type { Logger, Metrics, Tracer } from '@skyleague/event-horizon'
+import { vi } from 'vitest'
 
-export function mock<T>(): jest.MaybeMocked<T> & { mockClear(): void } {
-    const cache = new Map<any, jest.Mock>()
+export function unsafeMock<T>() {
+    const cache = new Map<any, unknown>()
     const handler: ProxyHandler<object> = {
         get: (_, name) => {
             if (name === 'mockClear') {
@@ -12,66 +13,67 @@ export function mock<T>(): jest.MaybeMocked<T> & { mockClear(): void } {
             }
 
             if (!cache.has(name)) {
-                cache.set(name, jest.fn().mockName(name.toString()))
+                cache.set(name, vi.fn().mockName(name.toString()))
             }
 
             return cache.get(name)
         },
     }
-    return new Proxy({}, handler) as jest.MaybeMocked<T> & { mockClear(): void }
+    return vi.mocked<T & { mockClear: () => void }>(new Proxy({}, handler) as T & { mockClear: () => void })
 }
 
-export function mockLogger(): jest.MaybeMocked<Logger> & { mockClear: () => void } {
+export function mockLogger() {
     const instance = new AwsLogger()
-    const shouldLogEvent = jest.spyOn(instance, 'shouldLogEvent')
-    const logger: jest.MaybeMocked<Logger> & { mockClear: () => void } = {
+    const shouldLogEvent = vi.spyOn(instance, 'shouldLogEvent')
+    shouldLogEvent.mockReturnValue(false)
+    const impl = {
         instance,
-        debug: jest.fn(),
-        info: jest.fn(),
-        warn: jest.fn(),
-        error: jest.fn(),
-        child: jest.fn().mockImplementation(() => logger),
-        setBindings: jest.fn(),
+        debug: vi.fn(),
+        info: vi.fn(),
+        warn: vi.fn(),
+        error: vi.fn(),
+        critical: vi.fn(),
+        child: vi.fn().mockImplementation(() => logger),
+        setBindings: vi.fn(),
         mockClear: () => {
-            logger.debug.mockClear()
-            logger.info.mockClear()
-            logger.warn.mockClear()
-            logger.error.mockClear()
-            logger.child.mockClear()
-            logger.setBindings.mockClear()
-            logger.child.mockImplementation(() => logger)
+            impl.debug.mockClear()
+            impl.info.mockClear()
+            impl.warn.mockClear()
+            impl.error.mockClear()
+            impl.critical.mockClear()
+            impl.child.mockClear()
+            impl.setBindings.mockClear()
+            impl.child.mockImplementation(() => logger)
             shouldLogEvent.mockClear()
             shouldLogEvent.mockReturnValue(false)
         },
     }
-    shouldLogEvent.mockReturnValue(false)
-    logger.child.mockImplementation(() => logger)
-
+    const logger = vi.mocked<Logger & { mockClear: () => void }>(impl as Logger & { mockClear: () => void })
     return logger
 }
 
-export function mockTracer(): jest.MaybeMocked<Tracer> & { mockClear: () => void } {
+export function mockTracer() {
     const instance = new AwsTracer()
-    const tracer: jest.MaybeMocked<Tracer> & { mockClear: () => void } = {
+    const tracer = vi.mocked<Tracer & { mockClear: () => void }>({
         instance,
-        trace: jest.fn(),
-        captureAWSv3Client: jest.fn(),
+        trace: vi.fn(),
+        captureAWSv3Client: vi.fn(),
         mockClear: () => {
             tracer.trace.mockClear()
             tracer.captureAWSv3Client.mockClear()
         },
-    }
+    })
     return tracer
 }
 
-export function mockMetrics(): jest.MaybeMocked<Metrics> & { mockClear: () => void } {
+export function mockMetrics() {
     const instance = new AwsMetrics()
-    const metrics: jest.MaybeMocked<Metrics> & { mockClear: () => void } = {
+    const metrics = vi.mocked<Metrics & { mockClear: () => void }>({
         instance,
-        add: jest.fn(),
+        add: vi.fn(),
         mockClear: () => {
             metrics.add.mockClear()
         },
-    }
+    })
     return metrics
 }
