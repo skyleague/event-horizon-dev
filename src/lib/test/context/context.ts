@@ -1,5 +1,5 @@
 import { Context } from '../../aws/lambda/index.js'
-import { mockLogger, mockMetrics, mockTracer } from '../../test/mock/mock.js'
+import { mockLogger, mockMetrics, mockTracer } from '../mock/mock.js'
 
 import type { Arbitrary, Dependent } from '@skyleague/axioms'
 import { constant, isFunction, object, random, string } from '@skyleague/axioms'

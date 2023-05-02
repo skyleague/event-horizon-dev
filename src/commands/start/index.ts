@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { context } from '../../lib/index.js'
 
 import { entriesOf, random, valuesOf } from '@skyleague/axioms'
 import type { EventHandler } from '@skyleague/event-horizon/src/handlers/types.js'
@@ -22,6 +21,8 @@ const app = express()
 
 export async function handler(argv: ReturnType<typeof builder>['argv']): Promise<void> {
     const { dir = process.cwd(), debug } = await argv
+
+    const { context } = await import('../../lib/test/index.js')
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const handlers = require(path.join(path.resolve(dir), '.'))
