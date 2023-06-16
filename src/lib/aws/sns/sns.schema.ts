@@ -11,14 +11,14 @@ export const SNSMessage = $object({
     SignatureVersion: $string,
     Timestamp: $string,
     Signature: $string,
-    SigningCertUrl: $string,
+    SigningCertURL: $string,
     MessageId: $string,
     Message: $string,
     MessageAttributes: $ref(SNSMessageAttributes),
     Type: $string,
-    UnsubscribeUrl: $string,
+    UnsubscribeURL: $string,
     TopicArn: $string,
-    Subject: $string,
+    Subject: $optional($string),
     Token: $optional($string),
 })
 
