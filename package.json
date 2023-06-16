@@ -10,10 +10,10 @@
   "author": "SkyLeague Technologies B.V. <technologies@skyleague.io> (https://skyleague.io)",
   "type": "module",
   "exports": {
-    ".": "./dist/index.js",
-    "./test": "./dist/src/lib/test/index.js",
+    ".": "./.dist/index.js",
+    "./test": "./.dist/src/lib/test/index.js",
     "./package.json": "./package.json",
-    "./*.js": "./dist/*.js"
+    "./*.js": "./.dist/*.js"
   },
   "types": "./.dist/index.d.ts",
   "bin": {
