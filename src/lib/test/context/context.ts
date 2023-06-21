@@ -3,10 +3,12 @@ import { mockLogger, mockMetrics, mockTracer } from '../mock/mock.js'
 
 import type { Arbitrary, Dependent } from '@skyleague/axioms'
 import { constant, isFunction, object, random, string } from '@skyleague/axioms'
-import type { Config, EventHandlerDefinition, LambdaContext, Services } from '@skyleague/event-horizon'
+import { type Config, type EventHandlerDefinition, type LambdaContext, type Services } from '@skyleague/event-horizon'
 import type { ProfileSchema } from '@skyleague/event-horizon/src/events/common/profile-handler.js'
 import { arbitrary } from '@skyleague/therefore'
 import type { Context as AwsContext } from 'aws-lambda'
+
+import { inspect } from 'node:util'
 
 export interface ContextOptions {
     exhaustive?: boolean
@@ -48,6 +50,9 @@ export async function context<Configuration = never, Service = never, Profile = 
                     o.logger.mockClear()
                     o.tracer.mockClear()
                     o.metrics.mockClear()
+                },
+                [inspect.custom]() {
+                    return `random(await context())`
                 },
             }
         })
