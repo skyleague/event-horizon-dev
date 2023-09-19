@@ -4,24 +4,6 @@ import { Tracer as AwsTracer } from '@aws-lambda-powertools/tracer'
 import type { Logger, Metrics, Tracer } from '@skyleague/event-horizon'
 import { vi } from 'vitest'
 
-export function unsafeMock<T>() {
-    const cache = new Map<any, unknown>()
-    const handler: ProxyHandler<object> = {
-        get: (_, name) => {
-            if (name === 'mockClear') {
-                return () => cache.clear()
-            }
-
-            if (!cache.has(name)) {
-                cache.set(name, vi.fn().mockName(name.toString()))
-            }
-
-            return cache.get(name)
-        },
-    }
-    return vi.mocked<T & { mockClear: () => void }>(new Proxy({}, handler) as T & { mockClear: () => void })
-}
-
 export function mockLogger() {
     const instance = new AwsLogger()
     const shouldLogEvent = vi.spyOn(instance, 'shouldLogEvent')
