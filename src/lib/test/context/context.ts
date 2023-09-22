@@ -2,7 +2,7 @@ import { Context } from '../../aws/lambda/index.js'
 import { mockLogger, mockMetrics, mockTracer } from '../mock/mock.js'
 
 import type { Arbitrary, Dependent } from '@skyleague/axioms'
-import { constant, isFunction, object, random, string } from '@skyleague/axioms'
+import { constant, integer, isFunction, object, random, string } from '@skyleague/axioms'
 import { type Config, type EventHandlerDefinition, type LambdaContext, type Services } from '@skyleague/event-horizon'
 import type { ProfileSchema } from '@skyleague/event-horizon/src/events/common/profile-handler.js'
 import { arbitrary } from '@skyleague/therefore'
@@ -37,6 +37,7 @@ export async function context<Configuration = never, Service = never, Profile = 
         requestId: string({ minLength: 2 }),
         traceId: string({ minLength: 2 }),
         isSensitive: constant(isSensitive ?? false),
+        getRemainingTimeInMillis: constant(() => integer({ min: 6000, max: 60000 })),
         raw: exhaustive ? ctxArb : constant(random(ctxArb)),
         config: constant(configObj) as Arbitrary<Configuration>,
         services: constant(isFunction(services) ? await services(configObj as Configuration) : services) as Arbitrary<Service>,
