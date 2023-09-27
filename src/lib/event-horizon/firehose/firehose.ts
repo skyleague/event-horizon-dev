@@ -10,7 +10,7 @@ export function firehoseTransformationEvent<
     Service = never,
     Profile = never,
     Payload = unknown,
-    Result = unknown
+    Result = unknown,
 >(
     definition: FirehoseTransformationHandler<Configuration, Service, Profile, Payload, Result>
 ): Dependent<FirehoseTransformationEvent<Payload>> {
