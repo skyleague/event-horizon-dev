@@ -14,7 +14,7 @@ export function httpEvent<
     Query = unknown,
     Headers = unknown,
     Result = unknown,
-    GV extends GatewayVersion = 'v1'
+    GV extends GatewayVersion = 'v1',
 >(
     definition: HTTPHandler<Configuration, Service, Profile, Body, Path, Query, Headers, Result, GV>
 ): Dependent<HTTPRequest<Body, Path, Query, Headers, GV>> {
