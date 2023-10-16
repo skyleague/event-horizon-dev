@@ -1,11 +1,11 @@
 import { SecretRotationEvent } from '../../aws/secret-rotation/secret-rotation.type.js'
 
-import type { Dependent } from '@skyleague/axioms'
-import type { DefaultServices, SecretRotationRequest } from '@skyleague/event-horizon'
+import type { Dependent, RequireKeys } from '@skyleague/axioms'
+import type { DefaultServices, SecretRotationEventHandler, SecretRotationRequest } from '@skyleague/event-horizon'
 import { arbitrary } from '@skyleague/therefore'
 
-export function secretRotationEvent<Config, Service extends DefaultServices | undefined = undefined>(
-    _options: { config?: Config; services?: Service } = {}
+export function secretRotationEvent<Configuration, Service extends RequireKeys<DefaultServices, 'secretsManager'>, Profile>(
+    _options?: SecretRotationEventHandler<Configuration, Service, Profile>
 ): Dependent<SecretRotationRequest> {
     return arbitrary(SecretRotationEvent).map((e) => ({
         raw: e,
