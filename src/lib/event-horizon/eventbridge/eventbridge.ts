@@ -5,7 +5,7 @@ import { tuple, unknown } from '@skyleague/axioms'
 import type { EventBridgeEvent, EventBridgeHandler } from '@skyleague/event-horizon'
 import { arbitrary } from '@skyleague/therefore'
 
-export function eventBridgeEvent<Configuration = never, Service = never, Profile = never, Payload = unknown, Result = unknown>(
+export function eventBridgeEvent<Configuration, Service, Profile, Payload, Result>(
     definition: EventBridgeHandler<Configuration, Service, Profile, Payload, Result>
 ): Dependent<EventBridgeEvent<Payload>> {
     const { eventBridge } = definition

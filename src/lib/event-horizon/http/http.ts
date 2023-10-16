@@ -6,15 +6,15 @@ import type { GatewayVersion, HTTPHandler, HTTPRequest } from '@skyleague/event-
 import { arbitrary } from '@skyleague/therefore'
 
 export function httpEvent<
-    Configuration = unknown,
-    Service = unknown,
-    Profile = unknown,
-    Body = unknown,
-    Path = unknown,
-    Query = unknown,
-    Headers = unknown,
-    Result = unknown,
-    GV extends GatewayVersion = 'v1',
+    Configuration,
+    Service,
+    Profile,
+    Body,
+    Path,
+    Query,
+    Headers,
+    Result,
+    GV extends GatewayVersion = 'rest',
 >(
     definition: HTTPHandler<Configuration, Service, Profile, Body, Path, Query, Headers, Result, GV>
 ): Dependent<HTTPRequest<Body, Path, Query, Headers, GV>> {

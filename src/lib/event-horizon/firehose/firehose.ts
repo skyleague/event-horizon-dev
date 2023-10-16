@@ -5,13 +5,7 @@ import { tuple, unknown } from '@skyleague/axioms'
 import type { FirehoseTransformationEvent, FirehoseTransformationHandler } from '@skyleague/event-horizon'
 import { arbitrary } from '@skyleague/therefore'
 
-export function firehoseTransformationEvent<
-    Configuration = never,
-    Service = never,
-    Profile = never,
-    Payload = unknown,
-    Result = unknown,
->(
+export function firehoseTransformationEvent<Configuration, Service, Profile, Payload, Result>(
     definition: FirehoseTransformationHandler<Configuration, Service, Profile, Payload, Result>
 ): Dependent<FirehoseTransformationEvent<Payload>> {
     const { firehose } = definition

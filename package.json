@@ -65,14 +65,14 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@skyleague/event-horizon": ">4.2.0",
-    "@skyleague/node-standards": "^3.10.3",
-    "@types/aws-lambda": "^8.10.122",
-    "@types/yargs": "^17.0.25",
+    "@skyleague/event-horizon": ">=5.0.4",
+    "@skyleague/node-standards": "^3.10.5",
+    "@types/aws-lambda": "^8.10.124",
+    "@types/yargs": "^17.0.28",
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "@skyleague/event-horizon": ">4.2.0"
+    "@skyleague/event-horizon": ">=5.0.4"
   },
   "engines": {
     "node": ">=18"
