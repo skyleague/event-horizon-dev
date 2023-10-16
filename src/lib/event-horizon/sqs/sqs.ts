@@ -5,7 +5,7 @@ import { object, unknown } from '@skyleague/axioms'
 import type { SQSEvent, SQSHandler } from '@skyleague/event-horizon'
 import { arbitrary } from '@skyleague/therefore'
 
-export function sqsEvent<Configuration = never, Service = never, Profile = never, Payload = unknown>(
+export function sqsEvent<Configuration, Service, Profile, Payload>(
     definition: SQSHandler<Configuration, Service, Profile, Payload>
 ): Dependent<SQSEvent<Payload>> {
     const { sqs } = definition

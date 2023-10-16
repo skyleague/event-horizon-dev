@@ -5,7 +5,7 @@ import { object, unknown } from '@skyleague/axioms'
 import type { SNSEvent, SNSHandler } from '@skyleague/event-horizon'
 import { arbitrary } from '@skyleague/therefore'
 
-export function snsEvent<Configuration = never, Service = never, Profile = never, Payload = unknown>(
+export function snsEvent<Configuration, Service, Profile, Payload>(
     definition: SNSHandler<Configuration, Service, Profile, Payload>
 ): Dependent<SNSEvent<Payload>> {
     const { sns } = definition

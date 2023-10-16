@@ -5,7 +5,7 @@ import { tuple, unknown } from '@skyleague/axioms'
 import type { KinesisEvent, KinesisHandler } from '@skyleague/event-horizon'
 import { arbitrary } from '@skyleague/therefore'
 
-export function kinesisEvent<Configuration = never, Service = never, Profile = never, Payload = unknown>(
+export function kinesisEvent<Configuration, Service, Profile, Payload>(
     definition: KinesisHandler<Configuration, Service, Profile, Payload>
 ): Dependent<KinesisEvent<Payload>> {
     const { kinesis } = definition
