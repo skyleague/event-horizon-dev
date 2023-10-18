@@ -5,7 +5,7 @@ import type { DefaultServices, SecretRotationHandler, SecretRotationRequest } fr
 import { arbitrary } from '@skyleague/therefore'
 
 export function secretRotationEvent<Configuration, Service extends RequireKeys<DefaultServices, 'secretsManager'>, Profile>(
-    _options?: SecretRotationHandler<Configuration, Service, Profile>
+    _definition?: Pick<SecretRotationHandler<Configuration, Service, Profile>, 'services' | 'config'>
 ): Dependent<SecretRotationRequest> {
     return arbitrary(SecretRotationEvent).map((e) => ({
         raw: e,

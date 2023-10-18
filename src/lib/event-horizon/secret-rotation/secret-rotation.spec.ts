@@ -8,3 +8,14 @@ import { it } from 'vitest'
 it('SecretRotationEvent === SecretRotationRequest.raw', () => {
     forAll(secretRotationEvent(), (r) => SecretRotationEvent.assert(r.raw))
 })
+
+it('SecretRotationEvent handles correct types', () => {
+    forAll(
+        secretRotationEvent({
+            config: {
+                foo: 'bar',
+            },
+        }),
+        (r) => SecretRotationEvent.assert(r.raw)
+    )
+})
