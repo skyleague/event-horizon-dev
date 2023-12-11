@@ -42,6 +42,17 @@ export function httpEvent<
                     event.raw.isBase64Encoded ? Buffer.from(b.toString()).toString('base64') : b
                 ) as typeof event.raw.body
             }
+
+            // force coercion
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+            http.schema.body?.is?.(event.body)
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+            http.schema.headers?.is?.(event.headers)
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+            http.schema.query?.is?.(event.query)
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+            http.schema.path?.is?.(event.path)
+
             event.raw.headers ??= (event.headers as typeof event.raw.headers) ?? {}
             event.raw.queryStringParameters ??= (event.query as typeof event.raw.queryStringParameters) ?? {}
             const rawEvent = event.raw

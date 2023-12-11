@@ -1,6 +1,6 @@
 {
   "name": "@skyleague/event-horizon-dev",
-  "version": "4.0.4",
+  "version": "4.0.11",
   "description": "The accompanying development package for @skyleague/event-horizon.",
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
     "package.json"
   ],
   "scripts": {
-    "build": "npx ts-node --esm build.config.ts",
+    "build": "npx tsx build.config.ts",
     "build:docs": "npx typedoc",
     "check:cost": "npx cost-of-modules --no-install --include-dev",
     "check:coverage": "npx vitest run --coverage=true",
@@ -85,7 +85,8 @@
   "node-standards": {
     "extends": "yargs-cli",
     "rules": {
-      "exports": false
+      "exports": false,
+      "scripts": false
     }
   }
 }
