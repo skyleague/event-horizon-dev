@@ -1,6 +1,6 @@
 {
   "name": "@skyleague/event-horizon-dev",
-  "version": "4.0.11",
+  "version": "5.0.0",
   "description": "The accompanying development package for @skyleague/event-horizon.",
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
     "package.json"
   ],
   "scripts": {
-    "build": "npx tsx build.config.ts",
+    "build": "node --import tsx/esm build.config.ts",
     "build:docs": "npx typedoc",
     "check:cost": "npx cost-of-modules --no-install --include-dev",
     "check:coverage": "npx vitest run --coverage=true",
@@ -42,22 +42,22 @@
     "test": "npx vitest run"
   },
   "dependencies": {
-    "@aws-sdk/client-appconfig": "^3.418.0",
-    "@aws-sdk/client-appconfigdata": "^3.418.0",
-    "@aws-sdk/client-dynamodb": "^3.420.0",
-    "@aws-sdk/client-eventbridge": "^3.418.0",
-    "@aws-sdk/client-firehose": "^3.418.0",
-    "@aws-sdk/client-s3": "^3.420.0",
-    "@aws-sdk/client-secrets-manager": "^3.418.0",
-    "@aws-sdk/client-sfn": "^3.418.0",
-    "@aws-sdk/client-sqs": "^3.418.0",
-    "@aws-sdk/client-ssm": "^3.419.0",
-    "@aws-sdk/client-ssm-incidents": "^3.418.0",
-    "@aws-sdk/lib-dynamodb": "^3.420.0",
-    "@aws-sdk/lib-storage": "^3.420.0",
-    "@skyleague/axioms": "^2.4.1",
-    "@skyleague/therefore": ">2.2.7 <4.0.0",
-    "@types/express": "^4.17.18",
+    "@aws-sdk/client-appconfig": "^3.477.0",
+    "@aws-sdk/client-appconfigdata": "^3.477.0",
+    "@aws-sdk/client-dynamodb": "^3.477.0",
+    "@aws-sdk/client-eventbridge": "^3.477.0",
+    "@aws-sdk/client-firehose": "^3.477.0",
+    "@aws-sdk/client-s3": "^3.477.0",
+    "@aws-sdk/client-secrets-manager": "^3.477.0",
+    "@aws-sdk/client-sfn": "^3.477.0",
+    "@aws-sdk/client-sqs": "^3.477.0",
+    "@aws-sdk/client-ssm": "^3.477.0",
+    "@aws-sdk/client-ssm-incidents": "^3.477.0",
+    "@aws-sdk/lib-dynamodb": "^3.477.0",
+    "@aws-sdk/lib-storage": "^3.477.0",
+    "@skyleague/axioms": "^3.0.0",
+    "@skyleague/therefore": ">=4.0.0",
+    "@types/express": "^4.17.21",
     "express": "^4.18.2",
     "express-list-endpoints": "^6.0.0",
     "express-promise-router": "^4.1.1",
@@ -65,17 +65,17 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@skyleague/event-horizon": ">=5.0.5",
-    "@skyleague/node-standards": "^3.10.5",
-    "@types/aws-lambda": "^8.10.124",
-    "@types/yargs": "^17.0.28",
-    "typescript": "^5.2.2"
+    "@skyleague/event-horizon": ">=6.0.0",
+    "@skyleague/node-standards": "^4.0.0",
+    "@types/aws-lambda": "^8.10.130",
+    "@types/yargs": "^17.0.32",
+    "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "@skyleague/event-horizon": ">=5.0.5"
+    "@skyleague/event-horizon": ">=6.0.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "publishConfig": {
     "access": "public",
@@ -85,8 +85,7 @@
   "node-standards": {
     "extends": "yargs-cli",
     "rules": {
-      "exports": false,
-      "scripts": false
+      "exports": false
     }
   }
 }
