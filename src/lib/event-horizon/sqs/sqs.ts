@@ -7,7 +7,7 @@ import { arbitrary } from '@skyleague/therefore'
 
 export function sqsEvent<Configuration, Service, Profile, Payload, MessageGrouping extends { by?: 'message-group-id' }>(
     definition: SQSHandler<Configuration, Service, Profile, Payload, MessageGrouping>
-): Dependent<SQSPayload<Payload, MessageGrouping>> {
+): Dependent<SQSPayload<MessageGrouping, Payload>> {
     const { sqs } = definition
     if (sqs.messageGrouping !== undefined) {
         return object({
@@ -15,7 +15,7 @@ export function sqsEvent<Configuration, Service, Profile, Payload, MessageGroupi
             payload: sqs.schema.payload !== undefined ? arbitrary(sqs.schema.payload) : unknown(),
             raw: arbitrary(SQSRecord),
             item: integer({ min: 0, max: 10 }),
-        } satisfies { [k in keyof SQSEvent]: unknown }) as Dependent<SQSPayload<Payload, MessageGrouping>>
+        } satisfies { [k in keyof SQSEvent]: unknown }) as Dependent<SQSPayload<MessageGrouping, Payload>>
     } else {
         return tuple(
             array(
@@ -40,6 +40,6 @@ export function sqsEvent<Configuration, Service, Profile, Payload, MessageGroupi
                     }) satisfies { [k in keyof SQSEvent]: unknown }
             ),
             messageGroupId,
-        })) as Dependent<SQSPayload<Payload, MessageGrouping>>
+        })) as Dependent<SQSPayload<MessageGrouping, Payload>>
     }
 }
