@@ -9,7 +9,7 @@ export function sqsEvent<Configuration, Service, Profile, Payload, MessageGroupi
     definition: SQSHandler<Configuration, Service, Profile, Payload, MessageGrouping>
 ): Dependent<SQSPayload<MessageGrouping, Payload>> {
     const { sqs } = definition
-    if (sqs.messageGrouping !== undefined) {
+    if (sqs.messageGrouping === undefined) {
         return object({
             messageGroupId: alphaNumeric({ minLength: 1 }),
             payload: sqs.schema.payload !== undefined ? arbitrary(sqs.schema.payload) : unknown(),
