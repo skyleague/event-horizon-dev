@@ -1,14 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Logger as AwsLogger } from '@aws-lambda-powertools/logger'
 import { Metrics as AwsMetrics } from '@aws-lambda-powertools/metrics'
 import { Tracer as AwsTracer } from '@aws-lambda-powertools/tracer'
 import type { Logger, Metrics, Tracer } from '@skyleague/event-horizon'
 import { vi } from 'vitest'
 
+type MockLogger = Logger & { mockClear: () => void }
 export function mockLogger() {
     const instance = new AwsLogger()
     const shouldLogEvent = vi.spyOn(instance, 'shouldLogEvent')
     shouldLogEvent.mockReturnValue(false)
-    const impl = {
+    const impl: any = {
         instance,
         debug: vi.fn(),
         info: vi.fn(),
@@ -30,7 +33,7 @@ export function mockLogger() {
             shouldLogEvent.mockReturnValue(false)
         },
     }
-    const logger = vi.mocked<Logger & { mockClear: () => void }>(impl as Logger & { mockClear: () => void })
+    const logger = vi.mocked<MockLogger>(impl as MockLogger)
     return logger
 }
 

@@ -47,6 +47,7 @@ export async function context<Configuration = never, Service = never, Profile = 
         services: constant(isFunction(services) ? await services(configObj as Configuration) : services) as Arbitrary<Service>,
         profile: constant(profile) as Arbitrary<Profile>,
     })
+        .constant()
         .map((o) => {
             return {
                 ...o,
